@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../compnents/dropDown.dart';
 import 'home_page.dart';
 
 class CategoryPage extends StatefulWidget {
@@ -27,22 +28,23 @@ class _CategoryPageState extends State<CategoryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Choose Quiz Settings'),
+        title: const Text('Choose Quiz Settings',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
+        backgroundColor: const Color(0xffA42fc1),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              width: 200, // Adjust width as needed
-              height: 200, // Adjust height as needed
+            SizedBox(
+              width: 200,
+              height: 200,
               child: Image.asset("assets/image/quiz.png"),
             ),
-            SizedBox(height: 16),
-            _buildDropDownWithTitle(
-              'Amount of Questions',
-              DropdownButton<int>(
-                hint: Text('Select Amount of Questions'),
+            const SizedBox(height: 16),
+            MyDropDown(
+              title: 'Amount of Questions',
+              dropdown: DropdownButton<int>(
+                hint: const Text('Select Amount of Questions'),
                 value: amount,
                 onChanged: (value) {
                   setState(() {
@@ -57,11 +59,11 @@ class _CategoryPageState extends State<CategoryPage> {
                 }).toList(),
               ),
             ),
-            SizedBox(height: 20),
-            _buildDropDownWithTitle(
-              'Category',
-              DropdownButton<int>(
-                hint: Text('Select Category'),
+            const SizedBox(height: 20),
+            MyDropDown(
+              title: 'Category',
+              dropdown: DropdownButton<int>(
+                hint: const Text('Select Category'),
                 value: category,
                 onChanged: (value) {
                   setState(() {
@@ -77,11 +79,11 @@ class _CategoryPageState extends State<CategoryPage> {
                 }).toList(),
               ),
             ),
-            SizedBox(height: 20),
-            _buildDropDownWithTitle(
-              'Difficulty',
-              DropdownButton<String>(
-                hint: Text('Select Difficulty'),
+            const SizedBox(height: 20),
+            MyDropDown(
+              title: 'Difficulty',
+              dropdown: DropdownButton<String>(
+                hint: const Text('Select Difficulty'),
                 value: difficulty,
                 onChanged: (value) {
                   setState(() {
@@ -96,7 +98,7 @@ class _CategoryPageState extends State<CategoryPage> {
                 }).toList(),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
                 if (category != null) {
@@ -110,19 +112,17 @@ class _CategoryPageState extends State<CategoryPage> {
                       ),
                     ),
                   );
-                } else {
-                  // Handle invalid category selection
-                  // Show an alert or prompt the user to select a valid category
                 }
               },
               style: ElevatedButton.styleFrom(
-                padding: EdgeInsets.symmetric(vertical: 12, horizontal: 40),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 12, horizontal: 40),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
-                backgroundColor: Color(0xffA42fc1), // Color for the button
+                backgroundColor: const Color(0xffA42fc1),
               ),
-              child: Text(
+              child: const Text(
                 'Start',
                 style: TextStyle(color: Colors.white),
               ),
@@ -130,36 +130,6 @@ class _CategoryPageState extends State<CategoryPage> {
           ],
         ),
       ),
-    );
-  }
-
-  Widget _buildDropDownWithTitle(String title, Widget dropdown) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Text(
-            title,
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-          ),
-        ),
-        SizedBox(height: 8),
-        Container(
-          width: 300,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
-            border: Border.all(
-              width: 3,
-              color: Color(0xffA42fc1),
-            ),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0),
-            child: dropdown,
-          ),
-        ),
-      ],
     );
   }
 }
